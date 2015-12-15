@@ -105,6 +105,28 @@ class DMatrix(object):
         energies = self.getEnergies()
         for label in energies:
             print("%s ----> %s"%(label, energies[label]) )
+        
+        #COEFFICIENTS
+        title = "\nCoefficients"
+        print(title)
+        print("="*len(title))
+        print("%s ----> %s"%("E", self.getE()))
+        print("%s ----> %s"%("D", self.getD()))
+
+
+        # ENERGY DIFFERENCES
+        title = "\nEnergy differences"
+        print(title)
+        print("="*len(title))
+        e1="x"
+        e2="y"
+        print("|%s - %s| = %s"%(e1, e2, abs(energies[e1]-energies[e2])))
+        e1="x"
+        e2="z"
+        print("|%s - %s| = %s"%(e1, e2, abs(energies[e1]-energies[e2])))
+        e1="y"
+        e2="z"
+        print("|%s - %s| = %s"%(e1, e2, abs(energies[e1]-energies[e2])))
 
 
 if __name__=="__main__" :
