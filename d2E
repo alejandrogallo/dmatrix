@@ -1,4 +1,5 @@
 #! /usr/bin/env python
+import os
 import sys
 import argparse
 
@@ -26,7 +27,19 @@ def parse_vasp(filePath):
     :returns: TODO
 
     """
-    pass
+    delimiter_up="matrix"
+    delimiter_down="---"
+    try:
+        fd = open(filePath, "r")
+        text = fd.read()
+    except:
+        raise Exception("File %s had problems..."%filePath)
+        sys.exit(1)
+   down_info=text.split(delimiter_up)  
+   info = down_info.split(delimiter_down)
+
+
+
 
 if __name__=="__main__":
     pass
