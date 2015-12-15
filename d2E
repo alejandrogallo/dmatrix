@@ -6,7 +6,7 @@ import argparse
 parser = argparse.ArgumentParser(description="D-matrix to Energy converter")
 
 parser.add_argument("-v", "--verbose", help="Make the output verbose", action="store_true")
-parser.add_argument("-f","--file", help="Input file where the matrix is.", action="store")
+parser.add_argument("-f", help="Input file where the matrix is.", action="store")
 parser.add_argument("--format", help="Format in which the matrix is saved (default vasp)", action="store", default="vasp")
 
 args = parser.parse_args()
@@ -16,9 +16,14 @@ if args.verbose:
     VERBOSE=True
 else:
     VERBOSE=False
+def vprint(arg1):
+    """
+    Verbose print
+    """
+    if VERBOSE:
+        print(arg1)
 
-
-MATRIX_FILE = args.file
+MATRIX_FILE = args.f
 
 def parse_vasp(filePath):
     """Parses the D-Matrix information from filePath in VASP format
@@ -27,19 +32,83 @@ def parse_vasp(filePath):
     :returns: TODO
 
     """
-    delimiter_up="matrix"
-    delimiter_down="---"
-    try:
-        fd = open(filePath, "r")
-        text = fd.read()
-    except:
-        raise Exception("File %s had problems..."%filePath)
+    delimiter_up="D_diag"
+    lines_delimiter=4
+    fd = os.popen("grep  '%s' -A %s %s"%( delimiter_up,lines_delimiter, filePath))
+    table = fd.read()
+    if not table:
+        raise Exception("No Information to be found in %s"%filePath)
         sys.exit(1)
-   down_info=text.split(delimiter_up)  
-   info = down_info.split(delimiter_down)
+    table_list = table.split("\n")
+    vprint("Information retreived:\n\n%s"%table)
+    diagonal = []
+    for row in table_list:
+        numbers = row.split(" "*4)
+        if len(numbers) == 4:
+#            print numbers 
+            try: 
+                fnum = float(numbers[0])
+            except:
+                continue
+            else: 
+                diagonal.append(fnum)
+    dmatrix = DMatrix(*diagonal)
+    dmatrix.printEnergies()
 
 
+class DMatrix(object):
+
+    """Implementation of the D-Matrix"""
+
+    def __init__(self, Dx, Dy, Dz):
+        self.Dx = Dx
+        self.Dy = Dy
+        self.Dz = Dz
+    def getE(self):
+        """
+        E = \frac{Dy - Dx}{2}
+        :returns: E parameter
+
+        """
+        return (self.Dy - self.Dx)/2
+    def getD(self):
+        """
+        D = 3/2 Dz
+        :returns: D parameter
+
+        """
+        return 3/2*self.Dz
+    def Ex(self):
+        """
+        Energy of the x eigenvector
+        \frac{D}{3} + (-E)
+        """
+        return self.getD()/3 - self.getE()
+    def Ey(self):
+        """
+        Energy of the y eigenvector
+        \frac{D}{3} - (-E)
+        """
+        return self.getD()/3 + self.getE()
+    def Ez(self):
+        """
+        Energy of the z eigenvector
+        -2\frac{D}{3}
+        """
+        return -2*self.getD()/3 
+    def getEnergies(self):
+        return {"x":self.Ex(), "y":self.Ey(),"z":self.Ez()}
+    def printEnergies(self):
+        title = "\n\nEnrgies from the D = Diag(%s, %s, %s) matrix"%(self.Dx, self.Dy, self.Dz)
+        print(title)
+        print("~"*len(title))
+        energies = self.getEnergies()
+        for label in energies:
+            print("%s ----> %s"%(label, energies[label]) )
 
 
-if __name__=="__main__":
-    pass
+if __name__=="__main__" :
+    if args.format == "vasp":
+        vprint("Using VASP format")
+        parse_vasp(MATRIX_FILE)
+
