@@ -5,31 +5,47 @@ import sys
 def parse_vasp(filePath):
     """Parses the D-Matrix information from filePath in VASP format
 
-    :filePath: TODO
-    :returns: TODO
+    :filePath: A file of OUTCAR format
+    :returns: 1 if something went wrong
 
     """
+    import re
+    vprint("Parsing VASP format from '%s'"%filePath)
+
+    # DELIMITERS TO GREP
     delimiter_up="D_diag"
-    lines_delimiter=4
-    fd = os.popen("grep  '%s' -A %s %s"%( delimiter_up,lines_delimiter, filePath))
+    lines_delimiter=5
+    # GREP
+    GREP = "grep  '%s' -A %d %s "%( delimiter_up, lines_delimiter, filePath)
+    vprint(GREP)
+    fd = os.popen(GREP)
     table = fd.read()
     fd.close()
+
     if not table:
         raise Exception("No Information to be found in %s"%filePath)
         sys.exit(1)
     table_list = table.split("\n")
     vprint("Information retreived:\n\n%s"%table)
     diagonal = []
+    TABLE_REGEX = re.compile("\s+?(-?\d+\.?\d*)\s+(-?\d+\.?\d*)\s+(-?\d+\.?\d*)\s+(-?\d+\.?\d*)")
     for row in table_list:
+        print "ASSSS"
+        print TABLE_REGEX.match(row)
         numbers = row.split(" "*4)
         if len(numbers) == 4:
-#            print numbers 
+            vprint( numbers ) 
             try: 
                 fnum = float(numbers[0])
             except:
                 continue
             else: 
                 diagonal.append(fnum)
+    if len(diagonal)==3:
+        vprint("Diagonal elements are: %s"%diagonal)
+    else:
+        raise Exception("Parsing diagonal elements, we do not have enough retrieved, only %d diagonal elements"%len(diagonal))
+        sys.exit(1)
     dmatrix = DMatrix(*diagonal)
     dmatrix.printEnergies()
 
@@ -83,7 +99,7 @@ class DMatrix(object):
         energies = self.getEnergies()
         for label in energies:
             print("%s ----> %s"%(label, energies[label]) )
-        
+
         #COEFFICIENTS
         title = "\nCoefficients"
         print(title)
@@ -106,6 +122,12 @@ class DMatrix(object):
         e2="z"
         print("|%s - %s| = %s"%(e1, e2, abs(energies[e1]-energies[e2])))
 
+def vprint(arg1):
+    """
+    Verbose print
+    """
+    if VERBOSE:
+        print(arg1)
 
 
 ############################
@@ -129,12 +151,6 @@ if __name__=="__main__" :
         VERBOSE=True
     else:
         VERBOSE=False
-    def vprint(arg1):
-        """
-        Verbose print
-        """
-        if VERBOSE:
-            print(arg1)
 
     MATRIX_FILE = args.f
     if args.format == "vasp":
