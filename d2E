@@ -30,29 +30,20 @@ def parse_vasp(filePath):
     diagonal = []
     TABLE_REGEX = re.compile("\s+?(-?\d+\.?\d*)\s+(-?\d+\.?\d*)\s+(-?\d+\.?\d*)\s+(-?\d+\.?\d*)")
     for row in table_list:
-        print "ASSSS"
         match = TABLE_REGEX.match(row)
-        print row
         if match:
-            print "MATCH YEAH"
+            diagonal_element = float(match.group(1))
+            diagonal+=[diagonal_element]
+            vprint("Regex Match!\n\t\t Element = %s"%diagonal_element)
         else:
             continue
-        # numbers = row.split(" "*4)
-        # if len(numbers) == 4:
-            # vprint( numbers ) 
-            # try: 
-                # fnum = float(numbers[0])
-            # except:
-                # continue
-            # else: 
-                # diagonal.append(fnum)
-    # if len(diagonal)==3:
-        # vprint("Diagonal elements are: %s"%diagonal)
-    # else:
-        # raise Exception("Parsing diagonal elements, we do not have enough retrieved, only %d diagonal elements"%len(diagonal))
-        # sys.exit(1)
-    # dmatrix = DMatrix(*diagonal)
-    # dmatrix.printEnergies()
+    if len(diagonal)==3:
+        vprint("Diagonal elements are: %s"%diagonal)
+    else:
+        raise Exception("Parsing diagonal elements, we do not have enough retrieved, only %d diagonal elements"%len(diagonal))
+        sys.exit(1)
+    dmatrix = DMatrix(*diagonal)
+    dmatrix.printEnergies()
 
 
 class DMatrix(object):
