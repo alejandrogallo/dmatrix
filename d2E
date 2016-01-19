@@ -1,29 +1,6 @@
 #! /usr/bin/env python
 import os
 import sys
-import argparse
-
-parser = argparse.ArgumentParser(description="D-matrix to Energy converter")
-
-parser.add_argument("-v", "--verbose", help="Make the output verbose", action="store_true")
-parser.add_argument("-f", help="Input file where the matrix is.", action="store")
-parser.add_argument("--format", help="Format in which the matrix is saved (default vasp)", action="store", default="vasp")
-
-args = parser.parse_args()
-
-if args.verbose:
-    print("Making the output verbose...")
-    VERBOSE=True
-else:
-    VERBOSE=False
-def vprint(arg1):
-    """
-    Verbose print
-    """
-    if VERBOSE:
-        print(arg1)
-
-MATRIX_FILE = args.f
 
 def parse_vasp(filePath):
     """Parses the D-Matrix information from filePath in VASP format
@@ -36,6 +13,7 @@ def parse_vasp(filePath):
     lines_delimiter=4
     fd = os.popen("grep  '%s' -A %s %s"%( delimiter_up,lines_delimiter, filePath))
     table = fd.read()
+    fd.close()
     if not table:
         raise Exception("No Information to be found in %s"%filePath)
         sys.exit(1)
@@ -129,7 +107,36 @@ class DMatrix(object):
         print("|%s - %s| = %s"%(e1, e2, abs(energies[e1]-energies[e2])))
 
 
+
+############################
+#  COMMAND LINE INTERFACE  #
+############################
+
+import argparse
+
+parser = argparse.ArgumentParser(description="D-matrix to Energy converter")
+
+parser.add_argument("-v", "--verbose", help="Make the output verbose", action="store_true")
+parser.add_argument("-f", help="Input file where the matrix is.", action="store")
+parser.add_argument("--format", help="Format in which the matrix is saved (default vasp)", action="store", default="vasp")
+
+
 if __name__=="__main__" :
+    args = parser.parse_args()
+
+    if args.verbose:
+        print("Making the output verbose...")
+        VERBOSE=True
+    else:
+        VERBOSE=False
+    def vprint(arg1):
+        """
+        Verbose print
+        """
+        if VERBOSE:
+            print(arg1)
+
+    MATRIX_FILE = args.f
     if args.format == "vasp":
         vprint("Using VASP format")
         parse_vasp(MATRIX_FILE)
