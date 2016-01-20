@@ -1,4 +1,5 @@
-#! /usr/bin/env python
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 import os
 import sys
 
@@ -48,7 +49,9 @@ def parse_vasp(filePath):
 
 class DMatrix(object):
 
-    """Implementation of the D-Matrix"""
+    """
+    Implementation of the D-Matrix
+    """
 
     def __init__(self, Dx, Dy, Dz):
         self.Dx = Dx
@@ -57,13 +60,19 @@ class DMatrix(object):
     def getE(self):
         """
         E = \frac{Dy - Dx}{2}
+                 Dy - Dx
+             E = ───────
+                    2   
         :returns: E parameter
 
         """
         return (self.Dy - self.Dx)/2
     def getD(self):
         """
-        D = 3/2 Dz
+        D = \frac{3}{2} Dz
+                 3
+             D = ─ Dz
+                 2
         :returns: D parameter
 
         """
@@ -72,18 +81,27 @@ class DMatrix(object):
         """
         Energy of the x eigenvector
         \frac{D}{3} + (-E)
+             D
+             ─ + (-E)
+             3
         """
         return self.getD()/3 - self.getE()
     def Ey(self):
         """
         Energy of the y eigenvector
         \frac{D}{3} - (-E)
+             D
+             ─ - (-E)
+             3
         """
         return self.getD()/3 + self.getE()
     def Ez(self):
         """
         Energy of the z eigenvector
         -2\frac{D}{3}
+               D
+             -2─
+               3
         """
         return -2*self.getD()/3 
     def getEnergies(self):
