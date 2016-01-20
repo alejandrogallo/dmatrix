@@ -46,18 +46,24 @@ def parse_vasp(filePath):
     dmatrix = DMatrix(*diagonal)
     dmatrix.printEnergies()
 
+def mhzToCm_1(mhz):
+    """Conversion from mhz into cm^-1
+    [http://physics.nist.gov/PhysRefData/wavenum/html/tables.html]
+    """
+    return mhz/29979.2458
 
 class DMatrix(object):
 
     """
     Implementation of the D-Matrix
+    The units are by default in MHz
     """
 
     def __init__(self, Dx, Dy, Dz):
         self.Dx = Dx
         self.Dy = Dy
         self.Dz = Dz
-    def getE(self):
+    def getE(self, units="MHz"):
         """
         E = \frac{Dy - Dx}{2}
                  Dy - Dx
@@ -66,8 +72,12 @@ class DMatrix(object):
         :returns: E parameter
 
         """
-        return (self.Dy - self.Dx)/2
-    def getD(self):
+        value = (self.Dy - self.Dx)/2
+        if units == "MHz":
+            return value
+        elif units == "cm-1":
+            return mhzToCm_1(value)
+    def getD(self, units="MHz"):
         """
         D = \frac{3}{2} Dz
                  3
@@ -76,8 +86,12 @@ class DMatrix(object):
         :returns: D parameter
 
         """
-        return 3/2*self.Dz
-    def Ex(self):
+        value = 3/2*self.Dz
+        if units == "MHz":
+            return value
+        elif units == "cm-1":
+            return mhzToCm_1(value)
+    def Ex(self, units="MHz"):
         """
         Energy of the x eigenvector
         \frac{D}{3} + (-E)
@@ -85,8 +99,8 @@ class DMatrix(object):
              ─ + (-E)
              3
         """
-        return self.getD()/3 - self.getE()
-    def Ey(self):
+        return self.getD(units)/3 - self.getE(units)
+    def Ey(self, units="MHz"):
         """
         Energy of the y eigenvector
         \frac{D}{3} - (-E)
@@ -94,8 +108,8 @@ class DMatrix(object):
              ─ - (-E)
              3
         """
-        return self.getD()/3 + self.getE()
-    def Ez(self):
+        return self.getD(units)/3 + self.getE(units)
+    def Ez(self, units="MHz"):
         """
         Energy of the z eigenvector
         -2\frac{D}{3}
@@ -103,10 +117,10 @@ class DMatrix(object):
              -2─
                3
         """
-        return -2*self.getD()/3 
-    def getEnergies(self):
-        return {"x":self.Ex(), "y":self.Ey(),"z":self.Ez()}
-    def printEnergies(self):
+        return -2*self.getD(units)/3 
+    def getEnergies(self, units="MHz"):
+        return {"x":self.Ex(units), "y":self.Ey(units),"z":self.Ez(units)}
+    def printEnergies(self, units):
         title = "\n\nEnrgies from the D = Diag(%s, %s, %s) matrix"%(self.Dx, self.Dy, self.Dz)
         print(title)
         print("~"*len(title))
