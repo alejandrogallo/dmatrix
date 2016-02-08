@@ -3,7 +3,7 @@
 import os
 import sys
 
-def parse_vasp(filePath, units):
+def parse_vasp(filePath, units, only_last=True):
     """Parses the D-Matrix information from filePath in VASP format
 
     :filePath: A file of OUTCAR format
@@ -13,11 +13,12 @@ def parse_vasp(filePath, units):
     import re
     vprint("Parsing VASP format from '%s'"%filePath)
 
+    GET_ONLY_LAST_MATCH=only_last
     # DELIMITERS TO GREP
-    delimiter_up="D_diag"
-    lines_delimiter=5
-    # GREP
-    GREP = "grep  '%s' -A %d %s "%( delimiter_up, lines_delimiter, filePath)
+    DELIMITER_UP="D_diag"
+    LINES_DELIMITER=5
+    # GREP process
+    GREP = "grep  '%s' -A %d %s "%( DELIMITER_UP, LINES_DELIMITER, filePath)
     vprint(GREP)
     fd = os.popen(GREP)
     table = fd.read()
@@ -26,7 +27,13 @@ def parse_vasp(filePath, units):
     if not table:
         raise Exception("No Information to be found in %s"%filePath)
         sys.exit(1)
-    table_list = table.split("\n")
+    # here if there are many steps, there may be a lot of matrices
+    if GET_ONLY_LAST_MATCH:
+        vprint("Getting only last match from the file");
+        table_list = table.split("\n")[-LINES_DELIMITER:]
+    else:
+        print("NOT YET IMPLEMENTED")
+        sys.exit(0)
     vprint("Information retreived:\n\n%s"%table)
     diagonal = []
     TABLE_REGEX = re.compile("\s+?(-?\d+\.?\d*)\s+(-?\d+\.?\d*)\s+(-?\d+\.?\d*)\s+(-?\d+\.?\d*)")
