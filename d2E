@@ -3,7 +3,7 @@
 import os
 import sys
 
-def parse_vasp(filePath):
+def parse_vasp(filePath, units):
     """Parses the D-Matrix information from filePath in VASP format
 
     :filePath: A file of OUTCAR format
@@ -43,7 +43,7 @@ def parse_vasp(filePath):
     else:
         raise Exception("Parsing diagonal elements, we do not have enough retrieved, only %d diagonal elements"%len(diagonal))
         sys.exit(1)
-    dmatrix = DMatrix(*diagonal)
+    dmatrix = DMatrix(*diagonal, units=units)
     dmatrix.printEnergies()
 
 def mhzToCm_1(mhz):
@@ -52,6 +52,11 @@ def mhzToCm_1(mhz):
     """
     return mhz/29979.2458
 
+def mhzToEV(mhz):
+    """TODO: Docstring for mhzToEV.
+    """
+    return mhz*4.1357e-9
+
 class DMatrix(object):
 
     """
@@ -59,11 +64,17 @@ class DMatrix(object):
     The units are by default in MHz
     """
 
-    def __init__(self, Dx, Dy, Dz):
+    def __init__(self, Dx, Dy, Dz, units="MHz"):
         self.Dx = Dx
         self.Dy = Dy
         self.Dz = Dz
-    def getE(self, units="MHz"):
+        self.units = units
+        self.implementedUnits = ["MHz", "cm-1", "eV"];
+        if not self.units in self.implementedUnits:
+            print("Sorry the units %s have not been yet implemented"%self.units)
+            print("Possible units: %s"%self.implementedUnits)
+            sys.exit(1)
+    def getE(self):
         """
         E = \frac{Dy - Dx}{2}
                  Dy - Dx
@@ -73,11 +84,13 @@ class DMatrix(object):
 
         """
         value = (self.Dy - self.Dx)/2
-        if units == "MHz":
+        if self.units == "MHz":
             return value
-        elif units == "cm-1":
+        elif self.units == "eV":
+            return mhzToEV(value)
+        elif self.units == "cm-1":
             return mhzToCm_1(value)
-    def getD(self, units="MHz"):
+    def getD(self):
         """
         D = \frac{3}{2} Dz
                  3
@@ -87,11 +100,13 @@ class DMatrix(object):
 
         """
         value = 3/2*self.Dz
-        if units == "MHz":
+        if self.units == "MHz":
             return value
-        elif units == "cm-1":
+        elif self.units == "eV":
+            return mhzToEV(value)
+        elif self.units == "cm-1":
             return mhzToCm_1(value)
-    def Ex(self, units="MHz"):
+    def Ex(self):
         """
         Energy of the x eigenvector
         \frac{D}{3} + (-E)
@@ -99,8 +114,8 @@ class DMatrix(object):
              ─ + (-E)
              3
         """
-        return self.getD(units)/3 - self.getE(units)
-    def Ey(self, units="MHz"):
+        return self.getD()/3 - self.getE()
+    def Ey(self):
         """
         Energy of the y eigenvector
         \frac{D}{3} - (-E)
@@ -108,8 +123,8 @@ class DMatrix(object):
              ─ - (-E)
              3
         """
-        return self.getD(units)/3 + self.getE(units)
-    def Ez(self, units="MHz"):
+        return self.getD()/3 + self.getE()
+    def Ez(self):
         """
         Energy of the z eigenvector
         -2\frac{D}{3}
@@ -117,11 +132,11 @@ class DMatrix(object):
              -2─
                3
         """
-        return -2*self.getD(units)/3 
-    def getEnergies(self, units="MHz"):
-        return {"x":self.Ex(units), "y":self.Ey(units),"z":self.Ez(units)}
-    def printEnergies(self, units):
-        title = "\n\nEnrgies from the D = Diag(%s, %s, %s) matrix"%(self.Dx, self.Dy, self.Dz)
+        return -2*self.getD()/3 
+    def getEnergies(self):
+        return {"x":self.Ex(), "y":self.Ey(),"z":self.Ez()}
+    def printEnergies(self):
+        title = "\n\nEnergies (%s) from the D = Diag(%s, %s, %s) matrix"%(self.units, self.Dx, self.Dy, self.Dz)
         print(title)
         print("~"*len(title))
         energies = self.getEnergies()
@@ -169,6 +184,7 @@ parser = argparse.ArgumentParser(description="D-matrix to Energy converter")
 parser.add_argument("-v", "--verbose", help="Make the output verbose", action="store_true")
 parser.add_argument("-f", help="Input file where the matrix is.", action="store")
 parser.add_argument("--format", help="Format in which the matrix is saved (default vasp)", action="store", default="vasp")
+parser.add_argument("-u", "--units", help="Units for the matrix (MHz, eV, cm-1)", action="store", default="MHz")
 
 
 if __name__=="__main__" :
@@ -180,8 +196,9 @@ if __name__=="__main__" :
     else:
         VERBOSE=False
 
+    units = args.units
     MATRIX_FILE = args.f
     if args.format == "vasp":
         vprint("Using VASP format")
-        parse_vasp(MATRIX_FILE)
+        parse_vasp(MATRIX_FILE, units)
 
