@@ -4,49 +4,49 @@
 \usepackage[]{amsmath}
 
 % Spins
-\newcommand{\uu}{\left | \uparrow\uparrow \right \rangle} 
-\newcommand{\dd}{\left | \downarrow\downarrow \right \rangle} 
-\newcommand{\du}{\left | \downarrow\uparrow \right \rangle} 
-\newcommand{\ud}{\left | \uparrow\downarrow \right \rangle} 
-\newcommand{\mone}{\frac{1}{\sqrt{ 2}}\left( \ud + \du\right)} 
-\newcommand{\mmone}{\frac{1}{\sqrt{ 2}}\left( \ud - \du\right)} 
-\newcommand{\x}{\frac{1}{\sqrt 2}\left( \uu + \dd\right)} 
-\newcommand{\y}{\frac{1}{\sqrt 2}\left( \uu - \dd\right)} 
+\newcommand{\uu}{\left | \uparrow\uparrow \right \rangle}
+\newcommand{\dd}{\left | \downarrow\downarrow \right \rangle}
+\newcommand{\du}{\left | \downarrow\uparrow \right \rangle}
+\newcommand{\ud}{\left | \uparrow\downarrow \right \rangle}
+\newcommand{\mone}{\frac{1}{\sqrt{ 2}}\left( \ud + \du\right)}
+\newcommand{\mmone}{\frac{1}{\sqrt{ 2}}\left( \ud - \du\right)}
+\newcommand{\x}{\frac{1}{\sqrt 2}\left( \uu + \dd\right)}
+\newcommand{\y}{\frac{1}{\sqrt 2}\left( \uu - \dd\right)}
 
 \begin{document}
 
 \section{Equivalence proof}
 \label{sec:equivalence_proof}
 
-This is the proof of the equivalence of the two representations of the zero field splitting tensor. Suppose we have the following matrix 
+This is the proof of the equivalence of the two representations of the zero field splitting tensor. Suppose we have the following matrix
 \begin{equation}
-	D = 
-	\left( 
-		\begin{matrix}
-			D _{xx} & & \\
-				& D _{yy} &\\
-			 && D _{zz}
-		\end{matrix}
-	\right)
+  D =
+  \left(
+    \begin{matrix}
+      D _{xx} & & \\
+        & D _{yy} &\\
+       && D _{zz}
+    \end{matrix}
+  \right)
 \end{equation}
 
-with the condition that $ \sum_{i} D _{ii} = 0 $ is equivalent to considering the following two 
-parameters: 
+with the condition that $ \sum_{i} D _{ii} = 0 $ is equivalent to considering the following two
+parameters:
 \begin{equation}
-	E = \frac{D _{yy} - D _{xx}}{2}, \quad D = \frac{3}{2}D _{zz}
+  E = \frac{D _{yy} - D _{xx}}{2}, \quad D = \frac{3}{2}D _{zz}
 \end{equation}
 
-A very quick calculation shows that 
+A very quick calculation shows that
 \begin{equation}
-	\left\{ 
-	\begin{matrix}
-		D _{xx} = -E - \frac{1}{3} D \\
-		\\
-		D _{yy} =  E - \frac{1}{3} D \\
-		\\
-		D _{zz} = \frac{2}{3} D
-	\end{matrix}
-	\right .
+  \left\{
+  \begin{matrix}
+    D _{xx} = -E - \frac{1}{3} D \\
+    \\
+    D _{yy} =  E - \frac{1}{3} D \\
+    \\
+    D _{zz} = \frac{2}{3} D
+  \end{matrix}
+  \right .
 \end{equation}
 
 which means that the diagonal elements are obtainable from the coefficients $ E $ and $ D $.
@@ -63,73 +63,73 @@ which means that the diagonal elements are obtainable from the coefficients $ E 
 \section{Formula deduction}
 \label{sec:formula_deduction}
 
-We part from the following Hamiltonian: 
+We part from the following Hamiltonian:
 \begin{equation}
-	\hat{H} _{ ss } =
-	+ D _{ x } \hat S ^{ 2 } _{ x } 
-	+ D _{ y } \hat S ^{ 2 } _{ y } 
-	+ D _{ z } \hat S ^{ 2 } _{ z } 
+  \hat{H} _{ ss } =
+  + D _{ x } \hat S ^{ 2 } _{ x }
+  + D _{ y } \hat S ^{ 2 } _{ y }
+  + D _{ z } \hat S ^{ 2 } _{ z }
 \end{equation}
 
-and for general angular momentum operators we have the following properties and definitions: 
+and for general angular momentum operators we have the following properties and definitions:
 \begin{equation}
-	\hat{S} _{ \pm }  = \hat{S} _{ x } \pm i \hat{S} _{ y } 
+  \hat{S} _{ \pm }  = \hat{S} _{ x } \pm i \hat{S} _{ y }
 \end{equation}
 \begin{equation}
-	\left\{ \hat{S} _{ + } , \hat{S} _{ - }  \right\} = 2(\mathbf{S} ^{ 2 } - \hat{S} _{ z } ^{ 2 } ) 
+  \left\{ \hat{S} _{ + } , \hat{S} _{ - }  \right\} = 2(\mathbf{S} ^{ 2 } - \hat{S} _{ z } ^{ 2 } )
 \end{equation}
 
-Let us replace in the expression for $ \hat{H} _{ ss } $ the coefficients $ D _{ i }  $ by 
+Let us replace in the expression for $ \hat{H} _{ ss } $ the coefficients $ D _{ i }  $ by
 $ E $ and $ D $ , i.e:
 
 
 \begin{align*}
-	\hat{H} _{ ss } &=
-	- \left(E + \frac{1}{3}D\right)  \hat S ^{ 2 } _{ x } 
-	+ \left(E - \frac{1}{3}D\right)  \hat S ^{ 2 } _{ y } 
-	+ \frac{2}{3}D \hat S ^{ 2 } _{ z } \\
-	&=
-	E \left( \hat{S} _{ y } ^{ 2 }  -\hat{S} _{ x } ^{ 2 }  \right)
-	+
-	\frac{D}{3} \left[ -\hat{S} ^{ 2 } _{ x } -\hat{S} _{ y } ^{ 2 } + 2\hat{S} _{ z } ^{ 2 }  \right]
+  \hat{H} _{ ss } &=
+  - \left(E + \frac{1}{3}D\right)  \hat S ^{ 2 } _{ x }
+  + \left(E - \frac{1}{3}D\right)  \hat S ^{ 2 } _{ y }
+  + \frac{2}{3}D \hat S ^{ 2 } _{ z } \\
+  &=
+  E \left( \hat{S} _{ y } ^{ 2 }  -\hat{S} _{ x } ^{ 2 }  \right)
+  +
+  \frac{D}{3} \left[ -\hat{S} ^{ 2 } _{ x } -\hat{S} _{ y } ^{ 2 } + 2\hat{S} _{ z } ^{ 2 }  \right]
 \end{align*}
 
-now we can express of course 
+now we can express of course
 
 \begin{align*}
-	-\hat{S} ^{ 2 } _{ x } -\hat{S} _{ y } ^{ 2 } + 2\hat{S} _{ z } ^{ 2 } &=
-	\hat{S} ^{ 2 } _{ z } -\mathbf S^{ 2 } + 2\hat{S} _{ z } ^{ 2 } = 
-	3\hat{S} ^{ 2 } _{ z } -\mathbf S^{ 2 } 
+  -\hat{S} ^{ 2 } _{ x } -\hat{S} _{ y } ^{ 2 } + 2\hat{S} _{ z } ^{ 2 } &=
+  \hat{S} ^{ 2 } _{ z } -\mathbf S^{ 2 } + 2\hat{S} _{ z } ^{ 2 } =
+  3\hat{S} ^{ 2 } _{ z } -\mathbf S^{ 2 }
 \end{align*}
 With this we can express the term of $ \hat{H} _{ ss }   $ depending on $ D $ as
 \begin{equation}
-	D
-	\left( 
-		\hat{S} _{ z } ^{ 2 } - \frac{1}{3} \mathbf{S} ^{ 2 } .
-	\right)
+  D
+  \left(
+    \hat{S} _{ z } ^{ 2 } - \frac{1}{3} \mathbf{S} ^{ 2 } .
+  \right)
 \end{equation}
 
-On the other hand we have the term $ \hat{S} _{ y } ^{ 2 } -\hat{S} _{ x } ^{ 2 }  $ 
-which we can rewrite as 
+On the other hand we have the term $ \hat{S} _{ y } ^{ 2 } -\hat{S} _{ x } ^{ 2 }  $
+which we can rewrite as
 \begin{equation}
-	\mathbf{S} ^{ 2 } - \hat{S}_{z}^{2} - 2 \hat{S}_{x}^{2} 
-	=
-	\frac{1}{2}\left\{ \hat{S} _{ + } , \hat{S} _{ - }  \right\}
-	- \frac{2}{4}\left( \hat{S} _{ +}  + \hat{S} _{ - }   \right) ^{ 2 } 
-	=
-	-\frac{\hat{S} _{ +} ^{ 2 } + \hat{S} _{ - } ^{ 2 } }{2}
+  \mathbf{S} ^{ 2 } - \hat{S}_{z}^{2} - 2 \hat{S}_{x}^{2}
+  =
+  \frac{1}{2}\left\{ \hat{S} _{ + } , \hat{S} _{ - }  \right\}
+  - \frac{2}{4}\left( \hat{S} _{ +}  + \hat{S} _{ - }   \right) ^{ 2 }
+  =
+  -\frac{\hat{S} _{ +} ^{ 2 } + \hat{S} _{ - } ^{ 2 } }{2}
 \end{equation}
 
 With all we can write for the Spin-Spin Hamilton operator
 \begin{equation}
-	\hat{H} _{ ss } 
-	=
-	\frac{-E}{2}\left( \hat{S} _{ +} ^{ 2 } + \hat{S} _{ - } ^{ 2 }   \right)
-	+
-	D
-	\left( 
-		\hat{S} _{ z } ^{ 2 } - \frac{1}{3} \mathbf{S} ^{ 2 } .
-	\right)
+  \hat{H} _{ ss }
+  =
+  \frac{-E}{2}\left( \hat{S} _{ +} ^{ 2 } + \hat{S} _{ - } ^{ 2 }   \right)
+  +
+  D
+  \left(
+    \hat{S} _{ z } ^{ 2 } - \frac{1}{3} \mathbf{S} ^{ 2 } .
+  \right)
 \end{equation}
 
 
@@ -139,80 +139,80 @@ With all we can write for the Spin-Spin Hamilton operator
 \section{Eigenvectors}
 \label{sec:eigenvectors}
 
-The eigenvectors of the operator $ \hat{H} _{ ss }   $ are not anymore the common eigenbasis of $ \hat \hat{S}_{z} $ and $ \mathbf{S} ^{ 2 }  $, i.e, 
+The eigenvectors of the operator $ \hat{H} _{ ss }   $ are not anymore the common eigenbasis of $ \hat \hat{S}_{z} $ and $ \mathbf{S} ^{ 2 }  $, i.e,
 \begin{equation}
-	\left\{ 
-		\uu, \dd, \mone, \mmone
-	\right\}
+  \left\{
+    \uu, \dd, \mone, \mmone
+  \right\}
 \end{equation}
-This is so because of the states with quantun number $ m_S \neq 0 $ , for example one sees that 
+This is so because of the states with quantun number $ m_S \neq 0 $ , for example one sees that
 \begin{equation}
-	\hat{H} _{ ss } \uu = a\uu + b \dd 
+  \hat{H} _{ ss } \uu = a\uu + b \dd
 \end{equation}
 with $ a $ and $ b $ different from zero.
-Instead, the new eigenbasis is formed by the following vectors: 
+Instead, the new eigenbasis is formed by the following vectors:
 \begin{equation}
-	\left\{ \mone, \x, \y, \mmone \right\}
+  \left\{ \mone, \x, \y, \mmone \right\}
 \end{equation}
 
-In order to see that this is indeed the case, one has to know how each operator appearing in $ \hat{H} _{ ss }  $  acts on every state. 
+In order to see that this is indeed the case, one has to know how each operator appearing in $ \hat{H} _{ ss }  $  acts on every state.
 
-In general we have for an angular momentum operator $ \hat{J}  $ that  
+In general we have for an angular momentum operator $ \hat{J}  $ that
 \begin{equation}
-	\hat{J} _{ \pm } \left | j, m \right \rangle = c _{ \pm } \left | j,m \pm 1 \right \rangle  
+  \hat{J} _{ \pm } \left | j, m \right \rangle = c _{ \pm } \left | j,m \pm 1 \right \rangle
 \end{equation}
-where 
+where
 \begin{equation}
-	c _{ \pm }  = \hbar \sqrt{ (j\mp m)(j \pm m +1)} 
+  c _{ \pm }  = \hbar \sqrt{ (j\mp m)(j \pm m +1)}
 \end{equation}
 
-where $ j $ and $ m $ are the pertinent quantum numbers. In our case $ j \in \left \{ 0,1 \right \}  $. 
-We can calculate the eigenvalues for $ \uu $ and $ \dd $, we need specially the following result 
+where $ j $ and $ m $ are the pertinent quantum numbers. In our case $ j \in \left \{ 0,1 \right \}  $.
+We can calculate the eigenvalues for $ \uu $ and $ \dd $, we need specially the following result
 \begin{align*}
-	\hat{S} _{ - } ^{ 2 } \uu &= 
-	\hat{S} _{ - } ^{ 2 } \left | j=1, m=1 \right \rangle = 
-	\sqrt{ 2\cdot 1 } \hbar \hat{S} _{ - }  \left | j=1, m=0 \right \rangle = \\
-	&
-	\sqrt{ 1\cdot 2 } \hbar  \sqrt{ 2\cdot 1 } \hbar  \left | j=1, m=-1 \right \rangle = 
-	2\hbar ^{ 2 } \dd
+  \hat{S} _{ - } ^{ 2 } \uu &=
+  \hat{S} _{ - } ^{ 2 } \left | j=1, m=1 \right \rangle =
+  \sqrt{ 2\cdot 1 } \hbar \hat{S} _{ - }  \left | j=1, m=0 \right \rangle = \\
+  &
+  \sqrt{ 1\cdot 2 } \hbar  \sqrt{ 2\cdot 1 } \hbar  \left | j=1, m=-1 \right \rangle =
+  2\hbar ^{ 2 } \dd
 \end{align*}
-and in the same spirit one can calculate $ \hat{S} _{ + } ^{ 2 } \dd = 2 \hbar ^{ 2 }  $. 
-Now we can calculate the eigenvalues: 
+and in the same spirit one can calculate $ \hat{S} _{ + } ^{ 2 } \dd = 2 \hbar ^{ 2 }  $.
+Now we can calculate the eigenvalues:
 \begin{equation}
-	\hat{H} _{ ss } \left( \uu \pm \dd \right)
-	=
-	\left(
-		\frac{D}{3}\pm (-E)\hbar 
-	\right)
-	\left( 
-		\uu \pm \dd
-	\right)
+  \hat{H} _{ ss } \left( \uu \pm \dd \right)
+  =
+  \left(
+    \frac{D}{3}\pm (-E)\hbar
+  \right)
+  \left(
+    \uu \pm \dd
+  \right)
 \end{equation}
 
 Since $ \mmone $ has quantum numbers $ j=0 $ and $ m=0 $ we have naturally
 \begin{equation*}
-	\hat{H} _{ ss } \left( \mmone \right) = 0 
+  \hat{H} _{ ss } \left( \mmone \right) = 0
 \end{equation*}
-and of course for the case $ j=1 $ and $ m=0 $ we have 
+and of course for the case $ j=1 $ and $ m=0 $ we have
 \begin{equation}
-	\hat{H} _{ ss } \left( \mone \right) = -\frac{2}{3}D \left( \mone \right) 
+  \hat{H} _{ ss } \left( \mone \right) = -\frac{2}{3}D \left( \mone \right)
 \end{equation}
 
 Therefore, in this basis the Hamilton operator has the following Matrix form
 
 \begin{equation}
-	\begin{pmatrix}
-		\frac{D}{3} - E & & & \\
-						     &\frac{D}{3} + E & & \\
-				       & & -\frac{2}{3}D & \\
-				       &&&0
-	\end{pmatrix}
-	\begin{matrix}
-		\x\\
-		\y\\
-		\mone\\
-		\mmone
-	\end{matrix}
+  \begin{pmatrix}
+    \frac{D}{3} - E & & & \\
+                 &\frac{D}{3} + E & & \\
+               & & -\frac{2}{3}D & \\
+               &&&0
+  \end{pmatrix}
+  \begin{matrix}
+    \x\\
+    \y\\
+    \mone\\
+    \mmone
+  \end{matrix}
 \end{equation}
 
 
