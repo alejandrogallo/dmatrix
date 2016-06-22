@@ -1,4 +1,4 @@
-
+% Preamble {{{1
 \documentclass[A4paper, 12pt]{article}
 
 \usepackage[]{amsmath}
@@ -16,55 +16,16 @@
 
 \begin{document}
 
-\section{Equivalence proof}
-\label{sec:equivalence_proof}
-
-This is the proof of the equivalence of the two representations of the zero field splitting tensor. Suppose we have the following matrix
-\begin{equation}
-  D =
-  \left(
-    \begin{matrix}
-      D _{xx} &   &   \\
-        & D _{yy} &\\
-       && D _{zz}
-    \end{matrix}
-  \right)
-\end{equation}
-
-with the condition that $ \sum_{i} D _{ii} = 0 $ is equivalent to considering the following two
-parameters:
-\begin{equation}
-  E = \frac{D _{yy} - D _{xx}}{2}, \quad D = \frac{3}{2}D _{zz}
-\end{equation}
-
-A very quick calculation shows that
-\begin{equation}
-  \left\{
-  \begin{matrix}
-    D _{xx} = -E - \frac{1}{3} D \\
-    \\
-    D _{yy} =  E - \frac{1}{3} D \\
-    \\
-    D _{zz} = \frac{2}{3} D
-  \end{matrix}
-  \right .
-\end{equation}
-
-which means that the diagonal elements are obtainable from the coefficients $ E $ and $ D $.
+\section{Introduction} %{{{1
+\label{sec:introduction}
 
 
 
+This is the proof of the equivalence of the two representations of the zero
+field spin-spin Hamiltonian. \\
 
+One can represent the spin-spin as
 
-
-
-
-
-
-\section{Formula deduction}
-\label{sec:formula_deduction}
-
-We part from the following Hamiltonian:
 \begin{equation}
   \hat{H} _{ss} =
   + D _{x} \hat S ^{2} _{x}
@@ -72,16 +33,81 @@ We part from the following Hamiltonian:
   + D _{z} \hat S ^{2} _{z}
 \end{equation}
 
-and for general angular momentum operators we have the following properties and definitions:
+This operator is in this case represented in terms of the spin component
+operators $ \hat{S}_{i}  $ where $ i \in \left \{ x,y,z \right \} $.  It turns
+out to be quite useful to represent the same operator in terms of the operators
+$ \hat{S}_{+}^{2}   $, $ \hat{S}_{-}^{2}   $, $ \hat{S}_{z}^{2}   $ and $
+\mathbf{S}^{2}  $.  From this alternative representation new constants $ E $
+and $ D $ appear.\\
+
+In the first representation, one can write the coefficients $ D_{i}  $  in matrix form,
+
 \begin{equation}
-  \hat{S} _{\pm}  = \hat{S} _{x} \pm i \hat{S} _{y}
-\end{equation}
-\begin{equation}
-  \left\{\hat{S} _{+} , \hat{S} _{-}  \right\} = 2(\mathbf{S} ^{2} - \hat{S} _{z} ^{2} )
+  \mathsf{D} =
+  \left(
+    \begin{matrix}
+      D _{x} &         &         \\
+              & D _{y} &         \\
+              &         & D _{z}
+    \end{matrix}
+  \right)
 \end{equation}
 
-Let us replace in the expression for $ \hat{H} _{ss} $ the coefficients $ D _{i}  $ by
-$ E $ and $ D $ , i.e:
+This matrix is traceless, i.e. $ \sum_{i} D _{ii} = 0
+$. The connection between coefficients $ E  $ and $ D $ is
+
+\begin{equation}
+  E = \frac{D _{y} - D _{x}}{2}, \quad D = \frac{3}{2}D _{z}
+\end{equation}
+
+as it will be shown in the coming section.  A very quick calculation shows that
+
+\begin{equation}
+  \left\{
+  \begin{matrix}
+    D _{x} = -E - \frac{1}{3} D \\
+                                 \\
+    D _{y} =  E - \frac{1}{3} D \\
+                                 \\
+    D _{z} = \frac{2}{3} D
+  \end{matrix}
+  \right .
+\end{equation}
+
+which means that the diagonal elements are obtainable from the coefficients $ E
+$ and $ D $ under the assumption that the matrix $ \mathsf{D} $ is traceless.
+
+
+
+
+
+
+
+
+
+
+\section{Formula deduction} %{{{1
+\label{sec:formula_deduction}
+
+We part from the following Hamiltonian:
+
+\begin{equation}
+  \hat{H} _{ss} =
+  + D _{x} \hat S ^{2} _{x}
+  + D _{y} \hat S ^{2} _{y}
+  + D _{z} \hat S ^{2} _{z}
+\end{equation}
+
+and for general angular momentum operators we have the following properties and
+definitions:
+
+\begin{align}
+  \hat{S} _{\pm}                               & = \hat{S} _{x} \pm i \hat{S} _{y}\\
+  \left\{\hat{S} _{+} , \hat{S} _{-}  \right\} & = 2(\mathbf{S} ^{2} - \hat{S} _{z} ^{2} )
+\end{align}
+
+Let us replace in the expression for $ \hat{H} _{ss} $ the coefficients $ D
+_{i}  $ by $ E $ and $ D $ , i.e.:
 
 
 \begin{align*}
@@ -102,16 +128,19 @@ now we can express of course
   \hat{S} ^{2} _{z} -\mathbf S^{2} + 2\hat{S} _{z} ^{2} =
   3\hat{S} ^{2} _{z} -\mathbf S^{2}
 \end{align*}
-With this we can express the term of $ \hat{H} _{ss}   $ depending on $ D $ as
+
+With this we can express the part of $ \hat{H} _{ss}   $ depending on $ D $ as
+
 \begin{equation}
   D
   \left(
-    \hat{S} _{z} ^{2} - \frac{1}{3} \mathbf{S} ^{2}.
-  \right)
+    \hat{S} _{z} ^{2} - \frac{1}{3} \mathbf{S} ^{2}
+  \right).
 \end{equation}
 
 On the other hand we have the term $ \hat{S} _{y} ^{2} -\hat{S} _{x} ^{2}  $
 which we can rewrite as
+
 \begin{equation}
   \mathbf{S} ^{2} - \hat{S}_{z}^{2} - 2 \hat{S}_{x}^{2}
   =
@@ -121,7 +150,8 @@ which we can rewrite as
   -\frac{\hat{S} _{+} ^{2} + \hat{S} _{-} ^{2}}{2}
 \end{equation}
 
-With all we can write for the Spin-Spin Hamilton operator
+With these small calculations we can write for the spin-spin Hamilton operator
+
 \begin{equation}
   \hat{H} _{ss}
   =
@@ -137,21 +167,26 @@ With all we can write for the Spin-Spin Hamilton operator
 
 
 
-\section{Eigenvectors}
+\section{Eigenvectors} %{{{1
 \label{sec:eigenvectors}
 
-The eigenvectors of the operator $ \hat{H} _{ss}   $ are not anymore the common eigenbasis of $ \hat{S}_{z} $ and $ \mathbf{S}^{2}  $, i.e,
+The eigenvectors of the operator $ \hat{H} _{ss}   $ are not anymore the common eigenbasis of $ \hat{S}_{z} $ and $ \mathbf{S}^{2}  $, i.e.,
+
 \begin{equation}
   \left\{
     \uu, \dd, \mone, \mmone
   \right\}
 \end{equation}
-This is so because of the states with quantun number $ m_S \neq 0 $ , for example one sees that
+
+This is so because of the states with quantum number $ m_S \neq 0 $ , for example one sees that
+
 \begin{equation}
   \hat{H} _{ss} \uu = a\uu + b \dd
 \end{equation}
+
 with $ a $ and $ b $ different from zero.
 Instead, the new eigenbasis is formed by the following vectors:
+
 \begin{equation}
   \left\{\mone, \x, \y, \mmone \right\}
 \end{equation}
@@ -159,16 +194,20 @@ Instead, the new eigenbasis is formed by the following vectors:
 In order to see that this is indeed the case, one has to know how each operator appearing in $ \hat{H} _{ss}  $  acts on every state.
 
 In general we have for an angular momentum operator $ \hat{J}  $ that
+
 \begin{equation}
   \hat{J} _{\pm} \left | j, m \right \rangle = c _{\pm} \left | j,m \pm 1 \right \rangle
 \end{equation}
+
 where
+
 \begin{equation}
   c _{\pm}  = \hbar \sqrt{(j\mp m)(j \pm m +1)}
 \end{equation}
 
 where $ j $ and $ m $ are the pertinent quantum numbers. In our case $ j \in \left \{0,1 \right \}  $.
 We can calculate the eigenvalues for $ \uu $ and $ \dd $, we need specially the following result
+
 \begin{align*}
   \hat{S} _{-} ^{2} \uu &=
   \hat{S} _{-} ^{2} \left | j=1, m=1 \right \rangle =
@@ -177,8 +216,10 @@ We can calculate the eigenvalues for $ \uu $ and $ \dd $, we need specially the 
   \sqrt{1\cdot 2} \hbar  \sqrt{2\cdot 1} \hbar  \left | j=1, m=-1 \right \rangle =
   2\hbar ^{2} \dd
 \end{align*}
+
 and in the same spirit one can calculate $ \hat{S} _{+} ^{2} \dd = 2 \hbar ^{2}  $.
 Now we can calculate the eigenvalues:
+
 \begin{equation}
   \hat{H} _{ss} \left( \uu \pm \dd \right)
   =
@@ -191,10 +232,13 @@ Now we can calculate the eigenvalues:
 \end{equation}
 
 Since $ \mmone $ has quantum numbers $ j=0 $ and $ m=0 $ we have naturally
+
 \begin{equation*}
   \hat{H} _{ss} \left( \mmone \right) = 0
 \end{equation*}
+
 and of course for the case $ j=1 $ and $ m=0 $ we have
+
 \begin{equation}
   \hat{H} _{ss} \left( \mone \right) = -\frac{2}{3}D \left( \mone \right)
 \end{equation}
@@ -203,18 +247,21 @@ Therefore, in this basis the Hamilton operator has the following Matrix form
 
 \begin{equation}
   \begin{pmatrix}
-    \frac{D}{3} - E & & & \\
-                 &\frac{D}{3} + E & & \\
-               & & -\frac{2}{3}D & \\
-               &&&0
+    \frac{D}{3} - E &                 &               &   \\
+                    & \frac{D}{3} + E &               &   \\
+                    &                 & -\frac{2}{3}D &   \\
+                    &                 &               & 0
   \end{pmatrix}
   \begin{matrix}
-    \x\\
-    \y\\
-    \mone\\
+    \x     \\
+    \y     \\
+    \mone  \\
     \mmone
   \end{matrix}
 \end{equation}
 
 
 \end{document}
+
+
+% vim: spell

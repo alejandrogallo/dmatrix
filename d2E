@@ -4,7 +4,8 @@ import os
 import sys
 
 def parse_vasp(filePath, units, only_last=True):
-    """Parses the D-Matrix information from filePath in VASP format
+    """
+    Parses the D-Matrix information from filePath in VASP format
 
     :filePath: A file of OUTCAR format
     :returns: 1 if something went wrong
@@ -54,13 +55,16 @@ def parse_vasp(filePath, units, only_last=True):
     dmatrix.printEnergies()
 
 def mhzToCm_1(mhz):
-    """Conversion from mhz into cm^-1
+    """
+    Conversion from mhz into cm^-1
     [http://physics.nist.gov/PhysRefData/wavenum/html/tables.html]
     """
     return mhz/29979.2458
 
 def mhzToEV(mhz):
-    """TODO: Docstring for mhzToEV.
+    """
+    Conversion from mhz into eV
+    [http://physics.nist.gov/PhysRefData/wavenum/html/tables.html]
     """
     return mhz*4.1357e-9
 
@@ -72,9 +76,9 @@ class DMatrix(object):
     """
 
     def __init__(self, Dx, Dy, Dz, units="MHz"):
-        self.Dx = Dx
-        self.Dy = Dy
-        self.Dz = Dz
+        self.Dx = float(Dx)
+        self.Dy = float(Dy)
+        self.Dz = float(Dz)
         self.units = units
         self.implementedUnits = ["MHz", "cm-1", "eV"];
         if not self.units in self.implementedUnits:
@@ -84,13 +88,15 @@ class DMatrix(object):
     def getE(self):
         """
         E = \frac{Dy - Dx}{2}
-                 Dy - Dx
-             E = ───────
-                    2   
+
+            Dy - Dx
+        E = ───────
+               2   
+
         :returns: E parameter
 
         """
-        value = (self.Dy - self.Dx)/2
+        value = (self.Dy - self.Dx)/2.0
         if self.units == "MHz":
             return value
         elif self.units == "eV":
@@ -100,13 +106,15 @@ class DMatrix(object):
     def getD(self):
         """
         D = \frac{3}{2} Dz
-                 3
-             D = ─ Dz
-                 2
+
+            3
+        D = ─ Dz
+            2
+
         :returns: D parameter
 
         """
-        value = 3/2*self.Dz
+        value = 3.0/2*self.Dz
         if self.units == "MHz":
             return value
         elif self.units == "eV":
@@ -116,28 +124,35 @@ class DMatrix(object):
     def Ex(self):
         """
         Energy of the x eigenvector
+
         \frac{D}{3} + (-E)
-             D
-             ─ + (-E)
-             3
+
+         D
+         ─ + (-E)
+         3
+
         """
         return self.getD()/3 - self.getE()
     def Ey(self):
         """
         Energy of the y eigenvector
         \frac{D}{3} - (-E)
-             D
-             ─ - (-E)
-             3
+
+         D
+         ─ - (-E)
+         3
+
         """
         return self.getD()/3 + self.getE()
     def Ez(self):
         """
         Energy of the z eigenvector
         -2\frac{D}{3}
-               D
-             -2─
-               3
+
+           D
+        -2 ─
+           3
+
         """
         return -2*self.getD()/3 
     def getEnergies(self):
