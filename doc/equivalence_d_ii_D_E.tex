@@ -2,6 +2,8 @@
 \documentclass[A4paper, 12pt]{article}
 
 \usepackage[]{amsmath}
+\usepackage[]{hyperref}
+\usepackage[utf8]{inputenc}
 \usepackage[margin=0.5cm]{geometry}
 
 % Spins
@@ -16,9 +18,10 @@
 
 \begin{document}
 
+%\tableofcontents
+
 \section{Introduction} %{{{1
 \label{sec:introduction}
-
 
 
 This is the proof of the equivalence of the two representations of the zero
@@ -65,11 +68,11 @@ as it will be shown in the coming section.  A very quick calculation shows that
 \begin{equation}
   \left\{
   \begin{matrix}
-    D _{x} = -E - \frac{1}{3} D \\
-                                 \\
-    D _{y} =  E - \frac{1}{3} D \\
-                                 \\
-    D _{z} = \frac{2}{3} D
+   D _{x}&=&-E-\frac{1}{3} D \\
+                             \\
+   D _{y}&=&E-\frac{1}{3}  D \\
+                             \\
+   D _{z}&=&\frac{2}{3}    D
   \end{matrix}
   \right .
 \end{equation}
@@ -153,14 +156,15 @@ which we can rewrite as
 With these small calculations we can write for the spin-spin Hamilton operator
 
 \begin{equation}
+  \label{eq:spin-spin-hamiltonian}
   \hat{H} _{ss}
   =
   \frac{-E}{2}\left( \hat{S} _{+} ^{2} + \hat{S} _{-} ^{2}   \right)
   +
   D
   \left(
-    \hat{S} _{z} ^{2} - \frac{1}{3} \mathbf{S}^{2}.
-  \right)
+    \hat{S} _{z} ^{2} - \frac{1}{3} \mathbf{S}^{2}
+  \right).
 \end{equation}
 
 
@@ -170,7 +174,8 @@ With these small calculations we can write for the spin-spin Hamilton operator
 \section{Eigenvectors} %{{{1
 \label{sec:eigenvectors}
 
-The eigenvectors of the operator $ \hat{H} _{ss}   $ are not anymore the common eigenbasis of $ \hat{S}_{z} $ and $ \mathbf{S}^{2}  $, i.e.,
+The eigenvectors of the operator $ \hat{H} _{ss}   $ are not the common
+eigenbasis of $ \hat{S}_{z} $ and $ \mathbf{S}^{2}  $, i.e.,
 
 \begin{equation}
   \left\{
@@ -178,20 +183,28 @@ The eigenvectors of the operator $ \hat{H} _{ss}   $ are not anymore the common 
   \right\}
 \end{equation}
 
-This is so because of the states with quantum number $ m_S \neq 0 $ , for example one sees that
+since the operators $ \hat{S}_{\pm}  $ appear in the expression through the
+constant $ E $. In particular, whenever $ E=0 $ the usual eigenbasis of $
+\hat{S}_{z}  $ and $ \mathbf{S}^{2}  $ is the solutions to the problem,
+therefore the quantum numbers $ m $ and $ j $ are good.\\
+
+%This is so because of the states with quantum number $ m_S \neq 0 $ , for
+%example one sees that
+%\begin{equation}
+  %\hat{H} _{ss} \uu = a\uu + b \dd
+%\end{equation}
+%with $ a $ and $ b $ different from zero.
+
+In general $ E\neq 0 $, the new eigenbasis is formed by the following set of vectors:
 
 \begin{equation}
-  \hat{H} _{ss} \uu = a\uu + b \dd
+  \label{eq:basis-of-spin-spin-hamiltonian}
+  \left\{\x, \y,\mone,  \mmone \right\}
 \end{equation}
-
-with $ a $ and $ b $ different from zero.
-Instead, the new eigenbasis is formed by the following vectors:
-
-\begin{equation}
-  \left\{\mone, \x, \y, \mmone \right\}
-\end{equation}
-
-In order to see that this is indeed the case, one has to know how each operator appearing in $ \hat{H} _{ss}  $  acts on every state.
+The effect of $ \hat{H}_{ss}  $ is therefore mixing the vectors with $ m=-1 $
+($ \dd $)  and $ m=1 $  ($ \uu $).  In order to see that this is indeed the
+case, one has to know how each operator appearing in $ \hat{H} _{ss}  $  acts
+on every state.\\
 
 In general we have for an angular momentum operator $ \hat{J}  $ that
 
@@ -202,11 +215,12 @@ In general we have for an angular momentum operator $ \hat{J}  $ that
 where
 
 \begin{equation}
-  c _{\pm}  = \hbar \sqrt{(j\mp m)(j \pm m +1)}
+  c _{\pm}  = \hbar \sqrt{(j\mp m)(j \pm m +1)} = \hbar \sqrt{j (j+1) - m (m\pm 1) }
 \end{equation}
 
-where $ j $ and $ m $ are the pertinent quantum numbers. In our case $ j \in \left \{0,1 \right \}  $.
-We can calculate the eigenvalues for $ \uu $ and $ \dd $, we need specially the following result
+where $ j $ and $ m $ are the pertinent quantum numbers. In our case $ j \in
+\left \{0,1 \right \}  $.  We can calculate the eigenvalues for $ \uu $ and $
+\dd $, we need specially the following result
 
 \begin{align*}
   \hat{S} _{-} ^{2} \uu &=
@@ -217,7 +231,7 @@ We can calculate the eigenvalues for $ \uu $ and $ \dd $, we need specially the 
   2\hbar ^{2} \dd
 \end{align*}
 
-and in the same spirit one can calculate $ \hat{S} _{+} ^{2} \dd = 2 \hbar ^{2}  $.
+and in the same spirit one can calculate $ \hat{S} _{+} ^{2} \dd = 2 \hbar ^{2} \uu  $.
 Now we can calculate the eigenvalues:
 
 \begin{equation}
@@ -243,7 +257,7 @@ and of course for the case $ j=1 $ and $ m=0 $ we have
   \hat{H} _{ss} \left( \mone \right) = -\frac{2}{3}D \left( \mone \right)
 \end{equation}
 
-Therefore, in this basis the Hamilton operator has the following Matrix form
+Therefore, in this
 
 \begin{equation}
   \begin{pmatrix}
@@ -259,6 +273,213 @@ Therefore, in this basis the Hamilton operator has the following Matrix form
     \mmone
   \end{matrix}
 \end{equation}
+
+
+
+
+
+\appendix
+\section{Eigenvalues calculation} %{{{1
+\label{sec:eigenvalues_calculation}
+
+Let us consider a general eigenvector
+$ \left | j,m \right \rangle  $. We know how $ \hat{S}_{z}  $ and $ \mathbf{S}^{2}  $ act on it, i.e.
+\begin{align*}
+\hat{S}_{z}^{2}  \left | j,m \right \rangle        & =
+(\hbar m)^{2} \left | j,m \right \rangle        \\
+\mathbf{S}^{2}  \left | j,m \right \rangle         & =
+\hbar^{2}  j(j+1)\left | j,m \right \rangle   \\
+\end{align*}
+
+We can perform the same calculation for $ \hat{S}_{\pm}^{2}  $, this goes as
+
+\begin{align*}
+\hat{S}_{\pm}^{2} \left | j,m \right \rangle &=
+  \hbar\sqrt{j(j+1)- m(m\pm 1) } \hat{S}_{\pm} \left | j,m\pm 1 \right \rangle \\
+&=
+  \hbar^{2}\sqrt{j(j+1)- m(m\pm 1) }\sqrt{j(j+1)- m(m\pm 2) } \left | j,m\pm 2 \right \rangle \\
+\end{align*}
+
+Let us remember the form of the Hamiltonian $ \hat{H}_{ss} $ in equation \ref{eq:spin-spin-hamiltonian}
+
+\begin{equation*}
+  \hat{H} _{ss}
+  =
+  \frac{-E}{2}\left( \hat{S} _{+} ^{2} + \hat{S} _{-} ^{2}   \right)
+  +
+  D
+  \left(
+    \hat{S} _{z} ^{2} - \frac{1}{3} \mathbf{S}^{2}
+  \right)
+  = \hat{H}_{ss}(E) + \hat{H}_{ss}(D)
+\end{equation*}
+
+The general basis we have built is formed by expressions of the form $ \left |
+\psi \right \rangle = c_{1} \left | j_{1},m_{1} \right \rangle  + c_{2} \left |
+j_{2}, m_{2} \right \rangle $. Let us calculate the general form of $
+\hat{H}_{ss} \left | \psi  \right \rangle   $ and afterwards substitute the
+particular values for the members of the basis. In this context, one sees that
+
+\begin{align}
+  \label{eq:D_part_spin_spin_general_calculation}
+\hat{H}_{ss}(D) \left | \psi  \right \rangle &=
+  \hbar^{2}D
+  \left(
+    c_{1}\left(m_{1}^{2} - \frac{1}{3} j_{1}(j_{1}+1)\right)
+    \left | j_{1}, m_{1} \right \rangle +
+    c_{2}\left(m_{2}^{2} - \frac{1}{3} j_{2}(j_{2}+1)\right)
+    \left | j_{2}, m_{2} \right \rangle
+  \right)
+\end{align}
+
+Analogously we have for the part of $ \hat{H}_{ss} $ depending on $ E $ that
+
+\begin{align}
+  \label{eq:E_part_spin_spin_general_calculation}
+\hat{H}_{ss}(E) \left | \psi  \right \rangle &=
+  \frac{-E\hbar^{2}}{2}
+  \sum^{2}_{l=1}
+  \sum^{1}_{k=0}
+  c_{l}
+  \sqrt{j_{l}(j_{l}+1)- m_{l}(m_{l}+(-1)^{k} 1) }\sqrt{j_{l}(j_{l}+1)- m_{l}(m_{l}+(-1)^{k} 2) }
+\left | j_{l},m_{l}+(-1)^{k} 2 \right \rangle
+\end{align}
+
+where $ k $ just accounts for the sign that arises in considering $ \hat{S}_{+}
+$ or $ \hat{S}_{-} $ and $ l $ accounts for both parts of $ \left | \psi
+\right \rangle  $.
+Now we can see which is the outcome for the basis provided in equation
+\ref{eq:basis-of-spin-spin-hamiltonian}.
+
+\begin{description}
+  \item[$ \left | \psi  \right \rangle $]
+  \item[$\x$] In this case we have $ m_{1} = 1 $, $ m_{2} = -1 $, $ j_{1}=j_{2}=1 $, $ c_{1} = c_{2} = \frac{1}{ \sqrt{2 } } $.
+    From equation \ref{eq:D_part_spin_spin_general_calculation} we can calculate therefore
+    \begin{align*}
+    \hat{H}_{ss}(D) \left | \psi  \right \rangle &=
+      \hbar^{2}D
+      2\left(1- \frac{2}{3}\right)
+    \left | \psi  \right \rangle =
+    \frac{2}{3}
+    \hbar^{2}D
+  \left | \psi  \right \rangle
+\end{align*}
+
+In the same way we can calculate the action of $ \hat{H}_{ss}(E) $ following
+equation \ref{eq:E_part_spin_spin_general_calculation}.  In the summation note
+that some terms will disappear since $ m_{l} \in \left \{ -1,1 \right \}  $ and
+$ j_{l} = 1 $, so for $ l=1 $ we will only have a part different from zero for
+$ k=1 $ since $ m_{1} = 1 $. In the same way we will have only a nonzero part
+for $ l=2 $ whenever $ k = 0 $.
+
+\begin{align*}
+\hat{H}_{ss}(E) \left | \psi  \right \rangle
+&=
+\frac{-E\hbar^{2}}{2}
+\frac{1}{ \sqrt{2 } }
+\sqrt{2- m_{1}(m_{1}-1) }
+\sqrt{2- m_{1}(m_{1}-2) }
+  \left | 1,m_{1}-2 \right \rangle \\
+  &+
+  \frac{-E\hbar^{2}}{2}
+  \frac{1}{ \sqrt{2 } }
+  \sqrt{2- m_{2}(m_{2}+ 1) }
+  \sqrt{2- m_{2}(m_{2}+ 2) }
+\left | 1,m_{2}+2 \right \rangle \\
+&=
+\frac{-E\hbar^{2}}{2}
+\frac{1}{ \sqrt{2 } }
+\sqrt{2}
+\sqrt{3}
+  \left | 1,-1\right \rangle
+  +
+  \frac{-E\hbar^{2}}{2}
+  \frac{1}{ \sqrt{2 } }
+  \sqrt{2}
+  \sqrt{3}
+\left | 1,1\right \rangle \\
+&=
+-\frac{ \sqrt{3 } }{ \sqrt{2 } }E\hbar^{2}
+  \left | \psi  \right \rangle
+\end{align*}
+
+Therefore we have for this case
+\begin{equation}
+  \label{eq:x-vector-eigenvalue-equation}
+  \hat{H}_{ss}
+\left | \psi  \right \rangle
+=
+\hbar^{2}
+\left(
+  \frac{2}{3} D
+  -
+  \frac{\sqrt{3}}{\sqrt{2}}E
+\right)
+\left | \psi  \right \rangle
+\end{equation}
+
+  \item[$\y$] The same argument and calculation is here valid as above, the
+    only difference is in the minus sign before $ \dd = \left | j=1,m=-1 \right
+  \rangle  $. Therefore the $ D $ part remains untouched. In the term depending
+  on $ E $, since $ \hat{H}_{ss}(E) $ has the effect of swapping $ m=-1 $ into
+  $ m=1 $, the only difference with above will be a minus sign, therefore in
+  this case we have a similar equation as in equation
+  \ref{eq:x-vector-eigenvalue-equation}, i.e.
+  \begin{equation}
+    \label{eq:y-vector-eigenvalue-equation}
+    \hat{H}_{ss}
+  \left | \psi  \right \rangle
+  =
+  \hbar^{2}
+  \left(
+    \frac{2}{3} D
+    +
+    \frac{\sqrt{3}}{\sqrt{2}}E
+  \right)
+\left | \psi  \right \rangle
+  \end{equation}
+
+\item[$\mone$] This case has $ c_{1}=1 $ and $ c_{2}=0 $ since here $ \left |
+\psi  \right \rangle = \left | j=1, m=0 \right \rangle  $. Therefore following
+the same procedure as in the previous examples we can obtain
+
+\begin{align}
+  \label{eq:D_part_spin_spin_general_calculation}
+  \hat{H}_{ss}(D)
+\left | \psi  \right \rangle &=
+  \hbar^{2}D
+  \left(0- \frac{1}{3} 2\right)
+\left | j_{1}, m_{1} \right \rangle
+=
+- \frac{2}{3}
+\hbar^{2}D
+\left | \psi  \right \rangle
+\end{align}
+
+Since $ m=0 $ the effect of $ \hat{S}_{\pm} $ on $ \left | \psi  \right \rangle  $ will be zero. Therefore there is only the $ D $ dependent term, i.e.
+\begin{equation}
+  \label{eq:z-vector-eigenvalue-equation}
+  \hat{H}_{ss}
+\left | \psi  \right \rangle
+=
+- \frac{2}{3}
+\hbar^{2}D
+\left | \psi  \right \rangle
+  \end{equation}
+
+
+\item[$\mmone$]
+  In this case we have $ \left | \psi  \right \rangle = \left | j=0, m=0 \right \rangle  $. Analogously to the previous case, the $ E $ term will vanish. Since $ j=0 $ and $ m=0 $ the $ D $ dependent part will also vanish. Thus,
+  \begin{equation}
+    \label{eq:z-vector-eigenvalue-equation}
+    \hat{H}_{ss}
+  \left | \psi  \right \rangle
+  =
+  0
+\left | \psi  \right \rangle
+  \end{equation}
+\end{description}
+
 
 
 \end{document}
