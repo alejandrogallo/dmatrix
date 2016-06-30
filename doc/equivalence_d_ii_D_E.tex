@@ -278,12 +278,14 @@ Therefore, in this
 
 
 
+
 \appendix
 \section{Eigenvalues calculation} %{{{1
 \label{sec:eigenvalues_calculation}
 
-Let us consider a general eigenvector
-$ \left | j,m \right \rangle  $. We know how $ \hat{S}_{z}  $ and $ \mathbf{S}^{2}  $ act on it, i.e.
+Let us consider a general eigenvector $ \left | j,m \right \rangle  $. We know
+how $ \hat{S}_{z}  $ and $ \mathbf{S}^{2}  $ act on it, i.e.
+
 \begin{align*}
 \hat{S}_{z}^{2}  \left | j,m \right \rangle        & =
 (\hbar m)^{2} \left | j,m \right \rangle        \\
@@ -295,12 +297,16 @@ We can perform the same calculation for $ \hat{S}_{\pm}^{2}  $, this goes as
 
 \begin{align*}
 \hat{S}_{\pm}^{2} \left | j,m \right \rangle &=
-  \hbar\sqrt{j(j+1)- m(m\pm 1) } \hat{S}_{\pm} \left | j,m\pm 1 \right \rangle \\
+  \hbar\sqrt{j(j+1)- m(m\pm 1) }
+\hat{S}_{\pm} \left | j,m\pm 1 \right \rangle \\
 &=
-  \hbar^{2}\sqrt{j(j+1)- m(m\pm 1) }\sqrt{j(j+1)- m(m\pm 2) } \left | j,m\pm 2 \right \rangle \\
+  \hbar^{2}\sqrt{j(j+1)- m(m\pm 1) }
+\sqrt{j(j+1)- m(m\pm 2) }
+\left | j,m\pm 2 \right \rangle \\
 \end{align*}
 
-Let us remember the form of the Hamiltonian $ \hat{H}_{ss} $ in equation \ref{eq:spin-spin-hamiltonian}
+Let us remember the form of the Hamiltonian $ \hat{H}_{ss} $ in equation
+\ref{eq:spin-spin-hamiltonian}
 
 \begin{equation*}
   \hat{H} _{ss}
@@ -456,7 +462,8 @@ the same procedure as in the previous examples we can obtain
 \left | \psi  \right \rangle
 \end{align}
 
-Since $ m=0 $ the effect of $ \hat{S}_{\pm} $ on $ \left | \psi  \right \rangle  $ will be zero. Therefore there is only the $ D $ dependent term, i.e.
+Since $ m=0 $ the effect of $ \hat{S}_{\pm} $ on $ \left | \psi  \right \rangle
+$ will be zero. Therefore there is only the $ D $ dependent term, i.e.
 \begin{equation}
   \label{eq:z-vector-eigenvalue-equation}
   \hat{H}_{ss}
@@ -469,7 +476,9 @@ Since $ m=0 $ the effect of $ \hat{S}_{\pm} $ on $ \left | \psi  \right \rangle 
 
 
 \item[$\mmone$]
-  In this case we have $ \left | \psi  \right \rangle = \left | j=0, m=0 \right \rangle  $. Analogously to the previous case, the $ E $ term will vanish. Since $ j=0 $ and $ m=0 $ the $ D $ dependent part will also vanish. Thus,
+  In this case we have $ \left | \psi  \right \rangle = \left | j=0, m=0 \right
+\rangle  $. Analogously to the previous case, the $ E $ term will vanish. Since
+$ j=0 $ and $ m=0 $ the $ D $ dependent part will also vanish. Thus,
   \begin{equation}
     \label{eq:z-vector-eigenvalue-equation}
     \hat{H}_{ss}
