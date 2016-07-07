@@ -207,6 +207,7 @@ parser.add_argument("-v", "--verbose", help="Make the output verbose", action="s
 parser.add_argument("-f", help="Input file where the matrix is.", action="store")
 parser.add_argument("--format", help="Format in which the matrix is saved (default vasp)", action="store", default="vasp")
 parser.add_argument("-u", "--units", help="Units for the matrix (MHz, eV, cm-1)", action="store", default="MHz")
+parser.add_argument("-d", "--diagonal", help="Matrix diagonal input, for getting dmatrix through several iterations for example.", action="store", type=float, nargs="*")
 
 
 if __name__=="__main__" :
@@ -217,6 +218,12 @@ if __name__=="__main__" :
         VERBOSE=True
     else:
         VERBOSE=False
+
+    if args.diagonal:
+        vprint("Diagonal elements %s in units of %s"%(args.diagonal, args.units))
+        dmatrix = DMatrix(*args.diagonal, units=args.units)
+        dmatrix.printEnergies()
+        sys.exit(0)
 
     units = args.units
     MATRIX_FILE = args.f
