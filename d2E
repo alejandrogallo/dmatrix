@@ -207,7 +207,7 @@ parser.add_argument("-v", "--verbose", help="Make the output verbose", action="s
 parser.add_argument("-f", help="Input file where the matrix is.", action="store")
 parser.add_argument("--format", help="Format in which the matrix is saved (default vasp)", action="store", default="vasp")
 parser.add_argument("-u", "--units", help="Units for the matrix (MHz, eV, cm-1)", action="store", default="MHz")
-parser.add_argument("-d", "--diagonal", help="Matrix diagonal input, for getting dmatrix through several iterations for example.", action="store", type=float, nargs="*")
+parser.add_argument("-d", "--diagonal", help="Matrix diagonal input, for getting dmatrix through several iterations for example.", action="store", type=float, nargs=3)
 
 
 if __name__=="__main__" :
