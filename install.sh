@@ -1,22 +1,27 @@
 
-# local install 
+function header()   { echo -e "\n\033[1m$@\033[0m"; }
+function success()  { echo -e " \033[1;32m==>\033[0m  $@"; }
+function error()    { echo -e " \033[1;31mX\033[0m  $@"; }
+function arrow()    { echo -e " \033[1;34m==>\033[0m  $@"; }
+function warning()  { echo -e " \033[0;93m==>\033[0m  $@"; }
 
+# local install 
 BIN="$HOME/bin"
 PROG_NAME="d2E"
 
 #control dest folder
 if test -d $BIN
 then 
-	echo "$BIN folder found!"
+	success "$BIN folder found!"
 else
-	echo "$BIN folder not found.. Nowhere to install the program"
+	error "$BIN folder not found.. Nowhere to install the program"
 	exit 1
 fi
 
 #control for existing program 
 if test -x $BIN/$PROG_NAME 
 then 
-	echo "The program is already there, overwriting it ..."
+	warning "The program is already there, overwriting it ..."
 	rm -f $BIN/$PROG_NAME
 fi
 
